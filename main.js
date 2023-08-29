@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 
 // scene camera setup
 var scene = new THREE.Scene();
@@ -26,6 +27,9 @@ scene.add( directionalLight );
 var loader = new GLTFLoader();
 var modelPath = '/assets/medieval_fantasy_book.gltf';
 
+// trackball control setup
+const controls = new TrackballControls(camera, renderer.domElement)
+
 loader.load(modelPath, function ( gltf ) {
 	var model = gltf.scene;
 	gltf.scene.scale.set( 2, 2, 2 );
@@ -41,6 +45,7 @@ loader.load(modelPath, function ( gltf ) {
 
 function animate() {
 	render();
+	controls.update()
 	requestAnimationFrame( animate );
 }
 
